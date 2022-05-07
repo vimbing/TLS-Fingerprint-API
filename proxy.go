@@ -15,10 +15,10 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/Carcraftz/cclient"
+	"github.com/vimbing/cclient-chrome100"
 	"github.com/andybalholm/brotli"
 
-	http "github.com/Carcraftz/fhttp"
+	http "github.com/vimbing/fhttp"
 
 	tls "github.com/Carcraftz/utls"
 )
@@ -82,15 +82,8 @@ func handleReq(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Change JA3
-	var tlsClient tls.ClientHelloID
-	if strings.Contains(strings.ToLower(userAgent), "chrome") {
-		tlsClient = tls.HelloChrome_Auto
-	} else if strings.Contains(strings.ToLower(userAgent), "firefox") {
-		tlsClient = tls.HelloFirefox_Auto
-	} else {
-		tlsClient = tls.HelloIOS_Auto
-	}
-	client, err := cclient.NewClient(tlsClient, proxy, allowRedirect, time.Duration(timeout))
+	 
+	client, err := cclient.NewClient(tls.HelloChrome_100, proxy, allowRedirect, time.Duration(timeout))
 	if err != nil {
 		log.Fatal(err)
 	}
